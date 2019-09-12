@@ -3,30 +3,54 @@ package com.example.malihakhizer.foodorderingapp.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.malihakhizer.foodorderingapp.Adapters.MenuAdapter;
+import com.example.malihakhizer.foodorderingapp.Models.Category;
 import com.example.malihakhizer.foodorderingapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
 
+public class Home extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener,MenuAdapter.OnItemListener {
+
+    private static final String TAG = "MyTag";
+    FirebaseDatabase db;
+    DatabaseReference reference;
     FirebaseAuth auth;
+
+    TextView textView;
+    RecyclerView recyclerView_menu;
+    RecyclerView.LayoutManager layoutManager;
+    MenuAdapter adapter ;
+    ArrayList<Category> categories = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +58,11 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        reference = db.getReference("category");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -55,6 +82,47 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //set name for user
+        String userName = auth.getCurrentUser().getDisplayName();
+        View headerView = navigationView.getHeaderView(0);
+        textView = findViewById(R.id.txtFullName);
+      //  textView.setText(userName);
+
+        recyclerView_menu = findViewById(R.id.category_recycler_view);
+        recyclerView_menu.setHasFixedSize(true);
+        recyclerView_menu.setLayoutManager(new LinearLayoutManager(this));
+
+        //load menu
+         loadmenu();
+    }
+
+    public void loadmenu(){
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                categories.clear();
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Category category = snapshot.getValue(Category.class);
+                    Log.d(TAG, "onDataChange: "+ category.getName());
+                    categories.add(category);
+                }
+
+                adapter = new MenuAdapter(getApplicationContext(), categories, new MenuAdapter.OnItemListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Toast.makeText(Home.this, "onClick: "+categories.get(position).getName()+" clicked!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                recyclerView_menu.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -118,5 +186,10 @@ public class Home extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+
     }
 }
