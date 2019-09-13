@@ -33,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class Home extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
     MenuAdapter adapter ;
     ArrayList<Category> categories = new ArrayList<>();
+    ArrayList<String> keys = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,18 +103,25 @@ public class Home extends AppCompatActivity
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 categories.clear();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    keys.add(snapshot.getKey());
                     Category category = snapshot.getValue(Category.class);
                     Log.d(TAG, "onDataChange: "+ category.getName());
                     categories.add(category);
                 }
-
                 adapter = new MenuAdapter(getApplicationContext(), categories, new MenuAdapter.OnItemListener() {
                     @Override
                     public void onClick(View view, int position) {
                         Toast.makeText(Home.this, "onClick: "+categories.get(position).getName()+" clicked!", Toast.LENGTH_SHORT).show();
+
+                        Log.d(TAG, "onClick: category: "+categories.get(position).getName());
+                        Log.d(TAG, "onClick: key: "+keys.get(position));
+
+                        Intent intent = new Intent(getApplicationContext(),FoodList.class);
+                        intent.putExtra("menuId",keys.get(position));
+                        startActivity(intent);
                     }
                 });
                 recyclerView_menu.setAdapter(adapter);
@@ -192,4 +201,24 @@ public class Home extends AppCompatActivity
     public void onClick(View view, int position) {
 
     }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView categoryImage;
+        TextView categoryName;
+        MenuAdapter.OnItemListener listener;
+
+        public ViewHolder(@NonNull View itemView,MenuAdapter.OnItemListener onItemListener) {
+            super(itemView);
+            categoryImage = itemView.findViewById(R.id.category_image);
+            categoryName = itemView.findViewById(R.id.category_name);
+            this.listener = onItemListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v, getAdapterPosition());
+        }
+    }
+
 }
