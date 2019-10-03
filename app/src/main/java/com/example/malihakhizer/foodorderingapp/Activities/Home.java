@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.malihakhizer.foodorderingapp.Adapters.MenuAdapter;
 import com.example.malihakhizer.foodorderingapp.Models.Category;
+import com.example.malihakhizer.foodorderingapp.MyProfile;
 import com.example.malihakhizer.foodorderingapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +34,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +62,7 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         reference = db.getReference("category");
@@ -71,8 +75,9 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                startActivity(new Intent(getApplicationContext(),Cart.class));
             }
         });
 
@@ -187,6 +192,7 @@ public class Home extends AppCompatActivity
         } else if (id == R.id.nav_my_orders) {
 
         } else if (id == R.id.nav_my_profile) {
+            startActivity(new Intent(Home.this,MyProfile.class));
 
         } else if (id == R.id.nav_contact_us) {
 

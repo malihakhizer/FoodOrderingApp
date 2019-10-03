@@ -13,8 +13,12 @@
     <!-- colors for tab and screent text -->
     <color name="tab_indicator_gray">#c0c0c0</color>
     <color name="grey">#46484a</color>
+    <color name="light_grey">#c7c8c9</color>
+    <color name="lightest_grey">#e6e6e6</color>
     <color name="intro_title_color">#000000</color>
 
     <color name="overlayBackground">#7f333639</color>
     <color name="overlayActionBar">#0e0d0e </color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
 </resources>

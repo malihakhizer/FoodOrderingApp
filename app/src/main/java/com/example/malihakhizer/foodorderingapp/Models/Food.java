@@ -8,6 +8,7 @@ public class Food {
     String menuId;
     String price;
 
+
     public Food() {
     }
 

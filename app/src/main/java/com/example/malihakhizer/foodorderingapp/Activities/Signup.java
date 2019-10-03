@@ -35,11 +35,11 @@ public class Signup extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference reference;
 
-    String name, email, password;
+    String name, email, password,phoneNumber;
     String regex = "^[\\p{L}\\p{N}\\._%+-]+@[\\p{L}\\p{N}\\.\\-]+\\.[\\p{L}]{2,}$";
 
     Button signupButton;
-    EditText editText_name, editText_email, editText_password;
+    EditText editText_name, editText_email, editText_password,editText_phoneNumber;
     TextView textView_name,textView_email,textView_password;
 
 
@@ -61,6 +61,8 @@ public class Signup extends AppCompatActivity {
                 name = editText_name.getText().toString().trim();
                 email = editText_email.getText().toString().trim();
                 password = editText_password.getText().toString().trim();
+                phoneNumber = editText_phoneNumber.getText().toString().trim();
+
                 validate();
             }
         });
@@ -70,10 +72,12 @@ public class Signup extends AppCompatActivity {
             editText_name = findViewById(R.id.signup_edittext_name);
             editText_email = findViewById(R.id.signup_edittext_email);
             editText_password = findViewById(R.id.signup_edittext_password);
+            editText_phoneNumber = findViewById(R.id.signup_edittext_phoneNumber);
 
             textView_email = findViewById(R.id.email_validation);
             textView_password = findViewById(R.id.password_validation);
             textView_name =findViewById(R.id.name_validation);
+
 
             signupButton = findViewById(R.id.button_signup);
         }
@@ -113,7 +117,7 @@ public class Signup extends AppCompatActivity {
                                 Toast.makeText(Signup.this, "Successfully signed up!", Toast.LENGTH_SHORT).show();
                                 FirebaseUser fuser = auth.getCurrentUser();
                                 String key = fuser.getUid();
-                                User user = new User(name,email,password,key,"");
+                                User user = new User(name,email,password,key,"",phoneNumber);
                                 reference.child(key).setValue(user);
                                 SUpdateUI();
                             } else {
