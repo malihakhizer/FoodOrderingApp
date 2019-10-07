@@ -1,9 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyProfile">
+    tools:context=".Activities.MyProfile">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:background="@drawable/grad">
+
+        <RelativeLayout
+            android:id="@+id/borderImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/circleborder">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/circle"
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/borderImage"
+            android:layout_margin="5dp"
+            android:text="Joey Tribiani"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/user_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:text="New York, US"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="240dp"
+        android:background="@color/white"
+        android:elevation="100dp"
+        app:cardCornerRadius="30dp">
+
+        <ImageButton
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/imgbutton"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_edit_black_24dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@color/headings"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="howyoudoing@live.com"
+                    android:textColor="@color/black"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:cursorVisible="false"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/othergrey" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textColor="@color/headings"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/user_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="A-6 amjad view apartment block 6 "
+                    android:textColor="@color/black"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:cursorVisible="false"
+                    android:inputType="none"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/othergrey" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone Number"
+                    android:textColor="@color/headings"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/user_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="0333-22211122"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:cursorVisible="false"
+                    android:textColor="@color/black"
+                    android:inputType="none"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/othergrey" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/profile_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:layout_margin="20dp"/>
+
+
+</RelativeLayout>

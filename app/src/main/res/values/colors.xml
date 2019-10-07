@@ -21,4 +21,16 @@
     <color name="overlayActionBar">#0e0d0e </color>
     <color name="black">#000</color>
     <color name="white">#fff</color>
+
+    <color name="addresss">#2F7092</color>
+    <color name="follower">#0D5D98</color>
+    <color name="headings">#3797CF</color>
+    <color name="solidCircle">#80FFFFFF</color>
+    <color name="circleBorder">#50FFFFFF</color>
+    <color name="gradEnd">#67EFC8</color>
+    <color name="gradStart">#63C9FF</color>
+    <color name="followerBg">#65DCE5</color>
+    <color name="followingBg">#49BEFF</color>
+    <color name="othergrey">#E5E5E5</color>
+
 </resources>

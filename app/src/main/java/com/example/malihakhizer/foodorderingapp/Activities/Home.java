@@ -5,10 +5,8 @@ import android.os.Bundle;
 
 import com.example.malihakhizer.foodorderingapp.Adapters.MenuAdapter;
 import com.example.malihakhizer.foodorderingapp.Models.Category;
-import com.example.malihakhizer.foodorderingapp.MyProfile;
 import com.example.malihakhizer.foodorderingapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.util.Log;
 import android.view.View;
@@ -23,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -34,8 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -195,6 +190,7 @@ public class Home extends AppCompatActivity
             startActivity(new Intent(Home.this,MyProfile.class));
 
         } else if (id == R.id.nav_contact_us) {
+            startActivity(new Intent(Home.this,ContactUs.class));
 
         }
 

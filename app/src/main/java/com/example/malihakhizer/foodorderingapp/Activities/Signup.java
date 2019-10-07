@@ -117,7 +117,7 @@ public class Signup extends AppCompatActivity {
                                 Toast.makeText(Signup.this, "Successfully signed up!", Toast.LENGTH_SHORT).show();
                                 FirebaseUser fuser = auth.getCurrentUser();
                                 String key = fuser.getUid();
-                                User user = new User(name,email,password,key,"",phoneNumber);
+                                User user = new User(name,email,password,key,"",phoneNumber,"");
                                 reference.child(key).setValue(user);
                                 SUpdateUI();
                             } else {

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.malihakhizer.foodorderingapp.R;
+
 public class ContactUs extends AppCompatActivity {
 
     @Override

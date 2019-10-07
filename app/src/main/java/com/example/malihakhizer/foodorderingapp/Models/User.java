@@ -7,14 +7,35 @@ public class User {
     String id;
     String url;
     String phone_number;
+    String address;
 
-    public User(String name, String email, String password, String id, String url,String phone_number) {
+    public User() {
+    }
+
+    public User(String name, String email, String password, String id, String url, String phone_number, String address) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.id = id;
         this.url = url;
         this.phone_number = phone_number;
+        this.address = address;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhone_number() {
